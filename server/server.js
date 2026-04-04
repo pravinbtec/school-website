@@ -7,6 +7,8 @@ const app = express();
 
 app.use(cors());
 app.use(express.json());
+console.log("MONGO_URI exists:", !!process.env.MONGO_URI);
+console.log("MONGO_URI starts with:", process.env.MONGO_URI?.slice(0, 20));
 
 mongoose
   .connect(process.env.MONGO_URI)

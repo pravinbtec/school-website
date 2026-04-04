@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { API_BASE_URL } from "./config";
 
 function Admin() {
     const navigate = useNavigate();
@@ -23,7 +24,7 @@ function Admin() {
 
  const fetchContacts = async () => {
   try {
-    const res = await axios.get("${import.meta.env.VITE_API_URL}/api/contact");
+    const res = await axios.get(`${API_BASE_URL}/api/contact`);
     setContacts(res.data);
   } catch (error) {
     console.log("Error fetching contacts:", error);
@@ -34,7 +35,7 @@ function Admin() {
 
   const fetchAdmissions = async () => {
   try {
-    const res = await axios.get("${import.meta.env.VITE_API_URL}/api/admission");
+    const res = await axios.get(`${API_BASE_URL}/api/admission`);
     setAdmissions(res.data);
   } catch (error) {
     console.log("Error fetching admissions:", error);
@@ -52,7 +53,7 @@ const deleteContact = async (id) => {
   if (!confirmDelete) return;
 
   try {
-    await axios.delete(`${import.meta.env.VITE_API_URL}/api/contact/${id}`);
+    await axios.delete(`${API_BASE_URL}/api/contact/${id}`);
     setContacts((prev) => prev.filter((item) => item._id !== id));
   } catch (error) {
     console.log("Error deleting contact message:", error);
@@ -64,7 +65,7 @@ const deleteAdmission = async (id) => {
   if (!confirmDelete) return;
 
   try {
-    const res = await axios.delete(`${import.meta.env.VITE_API_URL}/api/admission/${id}`);
+    const res = await axios.delete(`${API_BASE_URL}/api/admission/${id}`);
     console.log("Delete success:", res.data);
 
     setAdmissions((prev) => prev.filter((item) => item._id !== id));

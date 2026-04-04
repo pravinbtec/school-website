@@ -1,5 +1,6 @@
 import { useState } from "react";
 import axios from "axios";
+import { API_BASE_URL } from "./config";
 function Home() {
   const [showAdmissionForm, setShowAdmissionForm] = useState(false);
   const [formData, setFormData] = useState({
@@ -29,7 +30,7 @@ const handleSubmit = async (e) => {
   e.preventDefault();
 
   try {
-    const res = await axios.post("${import.meta.env.VITE_API_URL}/api/contact", formData);
+   const res = await axios.post(`${API_BASE_URL}/api/contact`, formData);
     setSuccessMessage(res.data.message);
     setFormData({
       name: "",
@@ -52,7 +53,7 @@ const handleAdmissionSubmit = async (e) => {
    console.log("clicked");
 
   try {
-    const res = await axios.post("${import.meta.env.VITE_API_URL}/api/admission", admissionData);
+    const res = await axios.post(`${API_BASE_URL}/api/admission`, admissionData);
     setAdmissionSuccess(res.data.message);
     setAdmissionData({
       studentName: "",
